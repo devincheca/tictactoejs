@@ -1,0 +1,292 @@
+// yes this uses the dreaded .innerHTML, project is intended to be a segway to more advanced JavaScript tasks
+function chose(avatar) {
+  if (avatar === 1) {
+    xo1.letter = "X";
+    xo2.letter = "O";
+  }
+  else {
+    xo1.letter = "O";
+    xo2.letter = "X";
+  }
+  document.getElementById("choose").className += " w3-hide";
+  document.getElementById("players").className = "w3-center w3-border w3-row";
+}
+function setup(player) {
+  if (player === 1) {
+    singlePlayer = true;
+  }
+  document.getElementById("players").className += " w3-hide";
+  document.getElementById("start").className = "w3-center w3-animate-opacity w3-white w3-container";
+  document.getElementById("app").className = "w3-show w3-animate-opacity";
+}
+function mark(index) {
+  if (turn % 2 === 1 && clickTrack[index] && xo1.letter != "") {
+    tally(index);
+    document.getElementById(index).innerHTML = xo1.letter;
+    if (checkWin1()) {
+      declareWinner(1);
+    }
+    clickTrack[index] = false;
+    turn++;
+  }
+  else if (clickTrack[index] && xo2.letter != "") {
+    tally(index);
+    document.getElementById(index).innerHTML = xo2.letter;
+    if (checkWin2()) {
+      declareWinner(2);
+    }
+    clickTrack[index] = false;
+    turn++;
+  }
+  if (turn > 9) {
+    if (checkWin1()) {
+      declareWinner(1);
+      var i;
+      for (i = 1; i < 10; i++) {
+        clickTrack[i] = false;
+      }
+    }
+    else {
+      declareWinner(0);
+    }
+  }
+  if (singlePlayer && !checkWin1()){
+    computerTurn(Math.round(Math.random * 10));
+  }
+}
+function computerTurn (index) {
+  do {
+    index = Math.round(Math.random() * 10);
+  }
+  while (!clickTrack[index]);
+  if (turn % 2 === 1 && clickTrack[index] && xo1.letter != "") {
+    tally(index);
+    document.getElementById(index).innerHTML = xo1.letter;
+    if (checkWin1()) {
+      declareWinner(1);
+    }
+    clickTrack[index] = false;
+    turn++;
+  }
+  else if (xo2.letter != "" && clickTrack[index]) {
+    tally(index);
+    document.getElementById(index).innerHTML = xo2.letter;
+    if (checkWin2() && !checkWin1()) {
+      declareWinner(2);
+    }
+    clickTrack[index] = false;
+    turn++;
+  }
+  if (turn > 9) {
+    if (checkWin1()) {
+      declareWinner(1);
+      var i;
+      for (i = 1; i < 10; i++) {
+        clickTrack[i] = false;
+      }
+    }
+    else {
+      declareWinner(0);
+    }
+  }
+}
+function tally(cell) {
+  if (turn % 2 === 1) {
+    switch (cell) {
+      case 1:
+        p1grid.row1 = p1grid.row1 + cell;
+        p1grid.col1 = p1grid.col1 + cell;
+        p1grid.id1 = p1grid.id1 + cell;
+      break;
+      case 2:
+        p1grid.row1 = p1grid.row1 + cell;
+        p1grid.col2 = p1grid.col2 + cell;
+      break;
+      case 3:
+	p1grid.row1 = p1grid.row1 + cell;
+	p1grid.col3 = p1grid.col3 + cell;
+	p1grid.id2 = p1grid.id2 + cell;
+      break;
+      case 4:
+	p1grid.row2 = p1grid.row2 + cell;
+	p1grid.col1 = p1grid.col1 + cell;
+      break;
+      case 5:
+	p1grid.row2 = p1grid.row2 + cell;
+	p1grid.col2 = p1grid.col2 + cell;
+	p1grid.id1 = p1grid.id1 + cell;
+	p1grid.id2 = p1grid.id2 + cell;
+      break;
+      case 6:
+      	p1grid.row2 = p1grid.row2 + cell;
+      	p1grid.col3 = p1grid.col3 + cell;
+      break;
+      case 7:
+	p1grid.row3 = p1grid.row3 + cell;
+	p1grid.col1 = p1grid.col1 + cell;
+	p1grid.id2 = p1grid.id2 + cell;
+      break;
+      case 8:
+	p1grid.row3 = p1grid.row3 + cell;
+	p1grid.col2 = p1grid.col2 + cell;
+      break;
+      case 9:
+	p1grid.row3 = p1grid.row3 + cell;
+	p1grid.col3 = p1grid.col3 + cell;
+	p1grid.id1 = p1grid.id1 + cell;				
+      break;
+      default:
+      break;
+    }
+  }
+  else {
+    player2Tally(cell);
+  }
+}
+function player2Tally (cell) {
+  switch (cell) {
+      case 1:
+        p2grid.row1 = p2grid.row1 + cell;
+	p2grid.col1 = p2grid.col1 + cell;
+	p2grid.id1 = p2grid.id1 + cell;
+      break;
+      case 2:
+	p2grid.row1 = p2grid.row1 + cell;
+	p2grid.col2 = p2grid.col2 + cell;
+      break;
+      case 3:
+	p2grid.row1 = p2grid.row1 + cell;
+	p2grid.col3 = p2grid.col3 + cell;
+	p2grid.id2 = p2grid.id2 + cell;
+      break;
+      case 4:
+	p2grid.row2 = p2grid.row2 + cell;
+	p2grid.col1 = p2grid.col1 + cell;
+      break;
+      case 5:
+	p2grid.row2 = p2grid.row2 + cell;
+	p2grid.col2 = p2grid.col2 + cell;
+	p2grid.id1 = p2grid.id1 + cell;
+	p2grid.id2 = p2grid.id2 + cell;
+      break;
+      case 6:
+	p2grid.row2 = p2grid.row2 + cell;
+	p2grid.col3 = p2grid.col3 + cell;
+      break;
+      case 7:
+	p2grid.row3 = p2grid.row3 + cell;
+	p2grid.col1 = p2grid.col1 + cell;
+	p2grid.id2 = p2grid.id2 + cell;
+      break;
+      case 8:
+      	p2grid.row3 = p2grid.row3 + cell;
+	p2grid.col2 = p2grid.col2 + cell;
+      break;
+      case 9:
+	p2grid.row3 = p2grid.row3 + cell;
+	p2grid.col3 = p2grid.col3 + cell;
+	p2grid.id1 = p2grid.id1 + cell;				
+      break;
+      default:
+      break;
+  }
+}
+function checkWin1() {
+  var success = false;
+  if (p1grid.row1 === 6 || p1grid.row2 === 15 || p1grid.row3 === 24 || p1grid.col1 === 12 || p1grid.col2 === 15 || p1grid.col3 === 18 || p1grid.id1 === 15 || p1grid.id2 === 15)   {
+    success = true;
+  }
+  return success;
+}
+function checkWin2() {
+  var success = false;
+  if (p2grid.row1 === 6 || p2grid.row2 === 15 || p2grid.row3 === 24 || p2grid.col1 === 12 || p2grid.col2 === 15 || p2grid.col3 === 18 || p2grid.id1 === 15 || p2grid.id2 === 15)   {
+    success = true;
+  }
+  return success;
+}
+function declareWinner(player) {
+  if (player === 0) {
+    document.getElementById("fin").innerHTML = "Neither player wins.</br>Restart to play again.";
+    document.getElementById("fin").className += " w3-show";
+  }
+  else {
+    document.getElementById("fin").innerHTML = "Player " + player + " wins!</br>Restart to play again.";
+    document.getElementById("fin").className += " w3-show";
+  }
+  document.getElementById("start").className += " w3-hide";
+  var i = 1;
+  for (i = 1; i < 10; i++) {
+    clickTrack[i] = false;
+  }
+}
+function restart() {
+  turn = 1;
+  p1grid.row1 = 0;
+  p1grid.row2 = 0;
+  p1grid.row3 = 0;
+  p1grid.col1 = 0;
+  p1grid.col2 = 0;
+  p1grid.col3 = 0;
+  p1grid.id1 = 0;
+  p1grid.id2 = 0;
+  p2grid.row1 = 0;
+  p2grid.row2 = 0;
+  p2grid.row3 = 0;
+  p2grid.col1 = 0;
+  p2grid.col2 = 0;
+  p2grid.col3 = 0;
+  p2grid.id1 = 0;
+  p2grid.id2 = 0;
+  xo1.letter = "";
+  xo2.letter = "";
+  singlePlayer = false;
+  var i = 1;
+  for (i = 1; i < 10; i++) {
+    document.getElementById(i).innerHTML = "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    clickTrack[i] = true;
+  }
+  document.getElementById("choose").className = "w3-animate-opacity w3-center w3-white w3-container";
+  document.getElementById("fin").className = "w3-white w3-col l12 m12 s12 w3-center w3-animate-opacity w3-hide";
+  document.getElementById("app").className = "w3-hide";
+}
+var singlePlayer = false;
+var turn = 1;
+var clickTrack = [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+];
+var p1grid = {
+  row1: 0,
+  row2: 0,
+  row3: 0,
+  col1: 0,
+  col2: 0,
+  col3: 0,
+  id1: 0,
+  id2: 0
+}
+var p2grid = {
+  row1: 0,
+  row2: 0,
+  row3: 0,
+  col1: 0,
+  col2: 0,
+  col3: 0,
+  id1: 0,
+  id2: 0
+}
+var xo1 = {
+  letter: ""
+}
+var xo2 = {
+  letter: ""
+}
