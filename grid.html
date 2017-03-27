@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <meta charset="utf-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<head>
+  <title>Tic-Tac-Toe by Devin Checa</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="ttt.js"></script>
+</head>
+<body class="w3-light-blue w3-content" style="max-width: 99%; margin: auto;">
+  <header class="w3-container w3-center w3-pink" style="font-size: 2em;">
+    Tic-Tac-Toe
+  </header>
+  <article class="w3-border w3-row" style="font-size: 1.75em; max-width: 500px; margin: auto;">
+    <div id="choose" class="w3-center w3-animate-opacity w3-white w3-container">
+      Click or tap on a white box to mark X or O. Hold phone vertical for proper display. First player choose<br />
+      <button href="#" class="w3-hover-white w3-btn w3-ripple" onClick="chose(1);">X</button>&nbsp or 
+      <button href="#" class="w3-hover-white w3-btn w3-ripple" onClick="chose(2);">O</button>
+    </div>
+    <div id="players" class="w3-center w3-border w3-row w3-hide" style="font-size: 1.75em; max-width: 500px;">
+      <button href="#" class="w3-hover-white w3-btn w3-ripple" onClick="setup(1);">One player</button>
+      <button href="#" class="w3-hover-white w3-btn w3-ripple" onClick="setup(2);">Two player</button>
+    </div>
+    <div id="start" class="w3-center w3-animate-opacity w3-white w3-container w3-hide">
+      Start
+    </div>
+    <br />
+    <h1 id="fin" class="w3-white w3-col l12 m12 s12 w3-center w3-animate-opacity w3-hide"></h1>
+    <div id="app" class="w3-hide">
+    <div id="1" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(1)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="2" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(2)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="3" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(3)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="4" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(4)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="5" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(5)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="6" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(6)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="7" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(7)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    <div id="8" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(8)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+      </div>
+    <div id="9" style="font-size: 2em;" class="w3-white w3-col l4 m4 s4 w3-animate-opacity w3-hover-opacity w3-border w3-border-orange w3-center" onclick="mark(9)">
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+    </div>
+  </article>
+  <button class="w3-right w3-hover-white w3-btn w3-ripple" onClick="restart();">Restart</button>
+</body>
+</html>
